@@ -1,7 +1,7 @@
-import { DataSource, Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, BaseEntity, CreateDateColumn, UpdateDateColumn, JoinColumn } from "typeorm"
+import { DataSource, Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm"
 
 @Entity()
-export class TestData extends BaseEntity {
+class TestData extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -23,17 +23,19 @@ export class TestData extends BaseEntity {
 const AuroraAppDataSource = new DataSource({
     type: "aurora-mysql",
     database: "testdb",
-    secretArn: "SECRET_ARN",
-    resourceArn: "RESOURCE_ARN",
+    secretArn: process.env.secretArn,
+    resourceArn:  process.env.resourceArn,
     region: "ap-northeast-1",
     entities: [TestData],
-    synchronize: false,
-    // logging: true,
+    synchronize: true,
+    logging: true,
 });
+
 (async () => {
+    await AuroraAppDataSource.initialize();
     const testDataRepo = AuroraAppDataSource.getRepository(TestData);
     console.log(await testDataRepo.create({
-        data: "SUPER"
+        data: "testdata"
     }));
     console.log(await testDataRepo.find());
 })();
