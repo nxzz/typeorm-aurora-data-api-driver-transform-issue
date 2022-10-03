@@ -24,7 +24,7 @@ const AuroraAppDataSource = new DataSource({
     type: "aurora-mysql",
     database: "testdb",
     secretArn: process.env.secretArn,
-    resourceArn:  process.env.resourceArn,
+    resourceArn: process.env.resourceArn,
     region: "ap-northeast-1",
     entities: [TestData],
     synchronize: true,
@@ -34,8 +34,13 @@ const AuroraAppDataSource = new DataSource({
 (async () => {
     await AuroraAppDataSource.initialize();
     const testDataRepo = AuroraAppDataSource.getRepository(TestData);
-    console.log(await testDataRepo.create({
-        data: "testdata"
-    }));
-    console.log(await testDataRepo.find());
+
+    // create
+    const testData = new TestData();
+    testData.id = 1;
+    testData.data = "testdata"
+    console.log(await testDataRepo.save(testData));
+
+    // read
+    console.log(await testDataRepo.find({ where: { id: 1 } }));
 })();
