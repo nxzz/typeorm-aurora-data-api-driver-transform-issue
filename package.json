@@ -1,0 +1,19 @@
+{
+  "name": "typeorm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "typeorm": "0.3.9",
+    "typeorm-aurora-data-api-driver": "^2.4.2"
+  },
+  "devDependencies": {
+    "typescript": "^4.4.4",
+    "@types/node": "^14.18.18"
+  },
+  "author": "",
+  "license": "ISC"
+}
