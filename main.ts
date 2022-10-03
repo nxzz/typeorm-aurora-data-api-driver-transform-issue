@@ -28,7 +28,7 @@ const AuroraAppDataSource = new DataSource({
     region: "ap-northeast-1",
     entities: [TestData],
     synchronize: true,
-    logging: true,
+    // logging: true,
 });
 
 (async () => {
