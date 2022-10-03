@@ -41,6 +41,9 @@ const AuroraAppDataSource = new DataSource({
     testData.data = "testdata"
     console.log(await testDataRepo.save(testData));
 
-    // read
+    // read many
     console.log(await testDataRepo.find({ where: { id: 1 } }));
+
+    // read one
+    console.log(await testDataRepo.findOneBy({ id: 1 }));
 })();
