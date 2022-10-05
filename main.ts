@@ -1,4 +1,6 @@
-import { DataSource, Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm"
+import { DataSource, Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn } from "typeorm"
+import { DateTime } from "luxon";
+import { OrmOpts } from "./timezone-fix";
 
 @Entity()
 class TestData extends BaseEntity {
@@ -18,6 +20,9 @@ class TestData extends BaseEntity {
         }
     })
     data: string;
+
+    @CreateDateColumn(OrmOpts.DateTime)
+    createdAt: DateTime;
 }
 
 const AuroraAppDataSource = new DataSource({
